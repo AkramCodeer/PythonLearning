@@ -1,0 +1,27 @@
+# RAG: Basics to Advanced
+
+This folder is a practical path for learning **Retrieval-Augmented Generation (RAG)**: a system that finds relevant information first, then gives that information to an LLM so its answer is grounded in your data.
+
+## Learning path
+
+1. [01_rag_fundamentals.md](01_rag_fundamentals.md) — concepts and the end-to-end flow.
+2. [02_visual_architecture.md](02_visual_architecture.md) — diagrams for basic and production RAG.
+3. [03_build_a_tiny_rag.py](03_build_a_tiny_rag.py) — dependency-free lexical retrieval.
+4. [04_advanced_rag.md](04_advanced_rag.md) — embeddings, hybrid search, reranking, evaluation, and safety.
+5. [05_rag_project_roadmap.md](05_rag_project_roadmap.md) — how to turn the concepts into a project.
+
+## Suggested order
+
+Read files 1 and 2, run file 3, then use files 4 and 5 to choose an advanced project. The Python demo runs with any recent Python 3 installation:
+
+```powershell
+python .\03_build_a_tiny_rag.py
+```
+
+## Core idea
+
+```text
+Your documents -> split + index -> retrieve relevant passages -> LLM -> grounded answer
+```
+
+RAG is usually a better fit than fine-tuning when knowledge changes frequently, must be traceable to sources, or is private to a team.
