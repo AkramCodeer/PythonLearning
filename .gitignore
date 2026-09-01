@@ -1,0 +1,6 @@
+# Local vector index created by the Chroma learning example
+rag_learning/chroma_data/
+
+# Python bytecode generated when running examples
+__pycache__/
+*.py[cod]

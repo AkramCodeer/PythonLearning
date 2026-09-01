@@ -10,6 +10,7 @@ This folder is a practical path for learning **Retrieval-Augmented Generation (R
 4. [04_advanced_rag.md](04_advanced_rag.md) — embeddings, hybrid search, reranking, evaluation, and safety.
 5. [05_rag_project_roadmap.md](05_rag_project_roadmap.md) — how to turn the concepts into a project.
 6. [06_generative_vs_agentic_ai_interview_guide.md](06_generative_vs_agentic_ai_interview_guide.md) — interview-ready explanations and examples from current-company work.
+7. [07_vector_databases_retrieval_and_embeddings.md](07_vector_databases_retrieval_and_embeddings.md) — vector DB choices, chunking, embeddings, retrieval, and a Chroma Python example.
 
 ## Suggested order
 
