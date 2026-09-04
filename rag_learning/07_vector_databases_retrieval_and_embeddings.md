@@ -2,6 +2,8 @@
 
 This guide explains where a vector database is used in RAG, how retrieval works, how chunks are created, and how to implement a small RAG retriever in Python.
 
+> New to RAG? Read [08_rag_vector_db_for_beginners.md](08_rag_vector_db_for_beginners.md) first. It explains the same flow without technical detail.
+
 ![RAG indexing and retrieval flow](rag_vector_db_retrieval_flow.png)
 
 ## The short answer
