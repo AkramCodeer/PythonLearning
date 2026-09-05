@@ -1,4 +1,4 @@
-# AI, LLMs, and Prompting
+# Artificial Intelligence (AI), Large Language Models (LLMs), and Prompting
 
 ## Three AI styles
 
@@ -40,22 +40,22 @@ The system instruction sets policy; the user supplies the task. In a secure appl
 | Zero-shot | Simple, well-defined task | “Classify this ticket as billing, support, or sales.” |
 | Few-shot | Format or behavior needs examples | “Follow these three input/output examples.” |
 | Role / persona | Tone and expertise | “Act as a finance analyst.” |
-| Structured output | Reliable machine consumption | “Return JSON matching this schema.” |
+| Structured output | Reliable machine consumption | “Return JavaScript Object Notation (JSON) matching this schema.” |
 | Retrieval-grounded | Private / changing knowledge | “Answer only from supplied context and cite sources.” |
 | Decomposition | Complex task | “First identify constraints, then produce a plan.” |
 
-**Prompt engineering vs fine-tuning:** prompt engineering changes instructions and examples at inference time; fine-tuning changes model weights using a training dataset. Start with prompt + RAG. Fine-tune when a stable, repeated behavior or style cannot be achieved reliably with prompting and examples.
+**Prompt engineering vs fine-tuning:** prompt engineering changes instructions and examples at inference time; fine-tuning changes model weights using a training dataset. Start with prompt + Retrieval-Augmented Generation (RAG). Fine-tune when a stable, repeated behavior or style cannot be achieved reliably with prompting and examples.
 
 ## Model families
 
 | Family | Input / output | Strong use |
 | --- | --- | --- |
-| Encoder-only | Text → representations / labels | Search embeddings, classification, NER |
+| Encoder-only | Text → representations / labels | Search embeddings, classification, Named Entity Recognition (NER) |
 | Decoder-only | Previous tokens → next token | Chat, generation, coding |
 | Encoder-decoder | Input sequence → output sequence | Translation, summarization, transformation |
 
 ## Routing and distillation
 
-**Prompt routing** selects the best model, prompt, tool, or workflow based on intent, complexity, cost, language, or risk. Example: send FAQ questions to RAG, complex analysis to a stronger model, and transactional requests to an agent workflow.
+**Prompt routing** selects the best model, prompt, tool, or workflow based on intent, complexity, cost, language, or risk. Example: send Frequently Asked Questions (FAQ) to RAG, complex analysis to a stronger model, and transactional requests to an agent workflow.
 
 **LLM distillation** trains a smaller “student” model to imitate useful behavior from a larger “teacher” model. It can reduce cost and latency, but it may lose capability; evaluate carefully on representative data.

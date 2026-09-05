@@ -1,8 +1,8 @@
-# Backend and System Design for AI Applications
+# Backend and System Design for Artificial Intelligence (AI) Applications
 
-## REST APIs
+## Representational State Transfer (REST) Application Programming Interfaces (APIs)
 
-REST is an architectural style for HTTP APIs built around resources. Typical operations use `GET` to read, `POST` to create, `PUT/PATCH` to update, and `DELETE` to remove. A good REST API uses clear resource URLs, status codes, authentication, validation, pagination, idempotency where needed, and versioning when contracts change.
+REST is an architectural style for Hypertext Transfer Protocol (HTTP) APIs built around resources. Typical operations use `GET` to read, `POST` to create, `PUT/PATCH` to update, and `DELETE` to remove. A good REST API uses clear resource URLs, status codes, authentication, validation, pagination, idempotency where needed, and versioning when contracts change.
 
 ## Flask vs FastAPI
 
@@ -13,7 +13,7 @@ REST is an architectural style for HTTP APIs built around resources. Typical ope
 | Async | Supported, but not its original core focus | Designed for async-friendly API work |
 | Best fit | Simple services or existing Flask ecosystem | Typed APIs, validation-heavy services, async I/O |
 
-FastAPI is often convenient for AI APIs because requests frequently wait on model, vector DB, or external tool I/O. Framework choice does not make a system scalable by itself—database, model latency, queueing, caching, observability, and deployment matter too.
+FastAPI is often convenient for AI APIs because requests frequently wait on model, vector database (DB), or external tool Input / Output (I/O). Framework choice does not make a system scalable by itself—database, model latency, queueing, caching, observability, and deployment matter too.
 
 ## Database optimization
 
@@ -24,7 +24,7 @@ FastAPI is often convenient for AI APIs because requests frequently wait on mode
 5. Partition/archive very large tables only after measuring.
 6. For RAG, separately tune chunk strategy, metadata filters, vector index parameters, and reranking.
 
-## AI service HLD
+## AI service High-Level Design (HLD)
 
 ```mermaid
 flowchart LR

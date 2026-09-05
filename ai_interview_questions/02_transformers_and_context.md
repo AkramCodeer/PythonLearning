@@ -2,7 +2,7 @@
 
 ## Why transformers were needed
 
-An RNN reads a sequence one step at a time and carries a hidden state forward. Long sequences make it hard to preserve early information, and sequential computation limits parallelism. Transformers use attention to connect tokens directly and train in parallel.
+A Recurrent Neural Network (RNN) reads a sequence one step at a time and carries a hidden state forward. Long sequences make it hard to preserve early information, and sequential computation limits parallelism. Transformers use attention to connect tokens directly and train in parallel.
 
 ```mermaid
 flowchart LR
@@ -55,4 +55,4 @@ flowchart LR
     V -->|invalid| R[Retry / repair / human review]
 ```
 
-Use structured outputs, tool schemas, validators, idempotency keys, permission checks, test cases, and low temperature. Never rely on an LLM alone for money movement, authorization, or irreversible actions.
+Use JavaScript Object Notation (JSON) structured outputs, tool schemas, validators, idempotency keys, permission checks, test cases, and low temperature. Never rely on a Large Language Model (LLM) alone for money movement, authorization, or irreversible actions.

@@ -1,4 +1,4 @@
-# RAG and Retrieval Systems
+# Retrieval-Augmented Generation (RAG) and Retrieval Systems
 
 ## RAG in one minute
 
@@ -8,7 +8,7 @@ Retrieval-Augmented Generation retrieves relevant private or current evidence be
 flowchart LR
     D[Documents] --> C[Chunk + metadata]
     C --> E[Embeddings]
-    E --> V[(Vector DB)]
+    E --> V[(Vector database)]
     Q[Question] --> QE[Query embedding]
     QE --> V
     V --> R[Relevant chunks]
@@ -26,20 +26,20 @@ Store metadata with every chunk: source, title, page/section, timestamp/version,
 | Search | Good at | Limitation |
 | --- | --- | --- |
 | Dense / vector | Meaning and paraphrases | Can miss exact IDs or rare terms |
-| Sparse / BM25 keyword | Exact names, SKUs, error codes | Weak at semantic paraphrases |
+| Sparse / Best Matching 25 (BM25) keyword | Exact names, Stock Keeping Units (SKUs), error codes | Weak at semantic paraphrases |
 | Hybrid | Combines both | More tuning and infrastructure |
 
-## ANN and HNSW
+## Approximate Nearest Neighbor (ANN) and Hierarchical Navigable Small World (HNSW)
 
 Exact nearest-neighbor search compares a query vector with every stored vector—accurate but slow at scale. **ANN** (Approximate Nearest Neighbor) searches an efficient index and accepts a tiny possibility of missing the exact best neighbor for much lower latency.
 
-**HNSW** (Hierarchical Navigable Small World) is a common ANN index. It builds multiple graph layers: upper layers make big jumps across the vector space; lower layers refine the local search. Key trade-offs are memory, build time, recall, and query latency.
+**HNSW** is a common ANN index. It builds multiple graph layers: upper layers make big jumps across the vector space; lower layers refine the local search. Key trade-offs are memory, build time, recall, and query latency.
 
 ## Reranking and HyDE
 
 **Reranking:** retrieve a broad candidate set (for example, 20–50), then use a stronger cross-encoder/reranker to score the query and each candidate together; pass only the best 3–8 chunks to the LLM. Libraries include `sentence-transformers` CrossEncoder, Cohere Rerank, and vendor rerank APIs.
 
-**HyDE (Hypothetical Document Embeddings):** ask an LLM to draft a hypothetical answer/document for the question, embed that draft, then retrieve real documents similar to it. It can improve semantic retrieval for vague questions, but real retrieved sources—not the hypothetical text—must be used as evidence.
+**Hypothetical Document Embeddings (HyDE):** ask a Large Language Model (LLM) to draft a hypothetical answer/document for the question, embed that draft, then retrieve real documents similar to it. It can improve semantic retrieval for vague questions, but real retrieved sources—not the hypothetical text—must be used as evidence.
 
 ## A production retrieval recipe
 

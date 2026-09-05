@@ -1,10 +1,12 @@
 # AI Interview Questions and Answers
 
+> **Full forms:** See [00_full_forms_glossary.md](00_full_forms_glossary.md). Every abbreviation used in this sheet is expanded there.
+
 ## AI fundamentals
 
 ### What is the difference between traditional AI, Generative AI, and Agentic AI?
 
-Traditional AI predicts or classifies a known output, such as fraud/not-fraud. Generative AI creates new content, such as a summary or code. Agentic AI adds planning, tool use, state, and controlled actions so a system can complete a multi-step goal. An agent still uses a generative model; it is the surrounding workflow that makes it agentic.
+Traditional **Artificial Intelligence (AI)** predicts or classifies a known output, such as fraud/not-fraud. Generative AI creates new content, such as a summary or code. Agentic AI adds planning, tool use, state, and controlled actions so a system can complete a multi-step goal. An agent still uses a generative model; it is the surrounding workflow that makes it agentic.
 
 ### What are system and user messages?
 
@@ -16,11 +18,11 @@ Chain-of-thought is the approach of using intermediate reasoning steps for diffi
 
 ### What prompting approaches should I know?
 
-Zero-shot gives only an instruction. Few-shot includes examples. Role prompting sets expertise or tone. Structured-output prompting requests JSON against a schema. Retrieval-grounded prompting supplies trusted evidence. Decomposition splits a difficult task into smaller stages. Choose the simplest approach that reliably meets the requirement.
+Zero-shot gives only an instruction. Few-shot includes examples. Role prompting sets expertise or tone. Structured-output prompting requests **JavaScript Object Notation (JSON)** against a schema. Retrieval-grounded prompting supplies trusted evidence. Decomposition splits a difficult task into smaller stages. Choose the simplest approach that reliably meets the requirement.
 
 ### How does prompt engineering differ from fine-tuning?
 
-Prompt engineering changes instructions, examples, and context at runtime. Fine-tuning changes model weights using training data. Start with a strong prompt and RAG because they are fast to iterate and keep knowledge current. Fine-tune for stable, repeated behavior or style that prompting cannot achieve consistently.
+Prompt engineering changes instructions, examples, and context at runtime. Fine-tuning changes model weights using training data. Start with a strong prompt and **Retrieval-Augmented Generation (RAG)** because they are fast to iterate and keep knowledge current. Fine-tune for stable, repeated behavior or style that prompting cannot achieve consistently.
 
 ## Models and transformers
 
@@ -30,7 +32,7 @@ Encoder-only models turn text into useful representations and are strong for emb
 
 ### What problem does a transformer solve compared with an RNN?
 
-An RNN processes tokens one by one, so it is difficult to parallelize and long-range information can weaken over many steps. A transformer uses attention so each token can directly weigh relevant tokens, enabling parallel training and stronger handling of long relationships.
+A **Recurrent Neural Network (RNN)** processes tokens one by one, so it is difficult to parallelize and long-range information can weaken over many steps. A transformer uses attention so each token can directly weigh relevant tokens, enabling parallel training and stronger handling of long relationships.
 
 ### What are self-attention and cross-attention?
 
@@ -42,7 +44,7 @@ They add positional information to token embeddings before attention. This can b
 
 ### What is tokenization?
 
-Tokenization splits text into IDs the model can process. A token is not always a full word; it may be a word piece, punctuation, or code fragment. Context-window usage and API cost are measured in tokens, so long prompts, retrieved chunks, and chat history must be managed carefully.
+Tokenization splits text into IDs the model can process. A token is not always a full word; it may be a word piece, punctuation, or code fragment. Context-window usage and **Application Programming Interface (API)** cost are measured in tokens, so long prompts, retrieved chunks, and chat history must be managed carefully.
 
 ### How do you handle context overload and the “lost in the middle” effect?
 
@@ -54,7 +56,7 @@ Retrieve only the most relevant chunks, rerank them, preserve source metadata, a
 
 ### How do you make LLM behavior more deterministic?
 
-Use a low temperature, JSON schemas, typed tool contracts, code validation, permission checks, idempotency keys, retries, and human approval for high-impact actions. The LLM can decide or draft, but deterministic code must validate and execute business rules.
+Use a low temperature, JSON schemas, typed tool contracts, code validation, permission checks, idempotency keys, retries, and human approval for high-impact actions. The **Large Language Model (LLM)** can decide or draft, but deterministic code must validate and execute business rules.
 
 ### What is prompt routing?
 
@@ -76,7 +78,7 @@ LangChain provides reusable components and integrations for prompts, models, ret
 
 ### What are MCP and A2A, and how are they different?
 
-MCP connects an AI application or agent to tools, resources, and reusable prompts—for example, a database or CRM tool server. A2A connects one agent to another remote agent that can work as a specialist. MCP is usually agent-to-capability; A2A is agent-to-agent collaboration.
+**Model Context Protocol (MCP)** connects an AI application or agent to tools, resources, and reusable prompts—for example, a database or **Customer Relationship Management (CRM)** tool server. **Agent2Agent Protocol (A2A)** connects one agent to another remote agent that can work as a specialist. MCP is usually agent-to-capability; A2A is agent-to-agent collaboration.
 
 ### What are the core components of A2A?
 
@@ -94,7 +96,7 @@ Prompt injection is untrusted content trying to override instructions or trigger
 
 ### What are LLM guardrails?
 
-Guardrails are layered runtime controls around an LLM: content moderation, PII redaction, prompt-injection detection, retrieval permission filters, tool policies, JSON validation, rate limiting, and output safety checks. They support model alignment but do not replace application security.
+Guardrails are layered runtime controls around an LLM: content moderation, **Personally Identifiable Information (PII)** redaction, prompt-injection detection, retrieval permission filters, tool policies, JSON validation, rate limiting, and output safety checks. They support model alignment but do not replace application security.
 
 ### Why do hallucinations happen and how do you reduce them?
 
@@ -102,7 +104,7 @@ LLMs generate likely next tokens, not verified facts. Hallucinations occur with 
 
 ### What are RLHF and Constitutional AI?
 
-RLHF uses human preference feedback to steer model behavior toward helpful, safe responses. Constitutional AI uses a written set of principles to critique and improve outputs, with AI feedback able to supplement human feedback. Both are alignment/training approaches; runtime guardrails are separate application controls.
+**Reinforcement Learning from Human Feedback (RLHF)** uses human preference feedback to steer model behavior toward helpful, safe responses. Constitutional AI uses a written set of principles to critique and improve outputs, with AI feedback able to supplement human feedback. Both are alignment/training approaches; runtime guardrails are separate application controls.
 
 ### How do you evaluate an LLM application and what is ground truth?
 
@@ -114,7 +116,7 @@ Ground truth is the trusted expected answer, label, source passage, tool call, o
 
 ### What is RAG retrieval?
 
-RAG retrieves relevant, permitted information before the LLM answers. Documents are split into chunks, embedded, and stored in a vector database. A user question is embedded with the same model; the vector DB finds similar chunks; then the application filters, reranks, and sends selected evidence to the LLM with a citation requirement.
+RAG retrieves relevant, permitted information before the LLM answers. Documents are split into chunks, embedded, and stored in a vector **database (DB)**. A user question is embedded with the same model; the vector DB finds similar chunks; then the application filters, reranks, and sends selected evidence to the LLM with a citation requirement.
 
 ### What chunking strategies are used in RAG?
 
@@ -122,11 +124,11 @@ Start with 300–800 tokens and 50–150 token overlap, then measure quality. Ch
 
 ### What are dense and sparse retrieval?
 
-Dense retrieval uses embeddings and finds semantic similarity, so it handles paraphrases well. Sparse retrieval uses keyword methods such as BM25 and is strong for exact product IDs, names, and error codes. Hybrid retrieval combines both and commonly improves production search.
+Dense retrieval uses embeddings and finds semantic similarity, so it handles paraphrases well. Sparse retrieval uses keyword methods such as **Best Matching 25 (BM25)** and is strong for exact product IDs, names, and error codes. Hybrid retrieval combines both and commonly improves production search.
 
 ### What are ANN and HNSW?
 
-ANN means Approximate Nearest Neighbor search: it finds near-best vectors much faster than checking every vector. HNSW is a popular ANN graph index with multiple layers; upper layers make large jumps and lower layers refine local results. The trade-off is memory and indexing cost versus retrieval speed and recall.
+**Approximate Nearest Neighbor (ANN)** search finds near-best vectors much faster than checking every vector. **Hierarchical Navigable Small World (HNSW)** is a popular ANN graph index with multiple layers; upper layers make large jumps and lower layers refine local results. The trade-off is memory and indexing cost versus retrieval speed and recall.
 
 ### What is reranking and what libraries can be used?
 
@@ -140,7 +142,7 @@ HyDE creates a hypothetical answer/document for the user’s question, embeds th
 
 ### What is a REST API?
 
-REST is an HTTP API style centered on resources. Common operations are GET for reads, POST for creation, PUT/PATCH for updates, and DELETE for removal. Good REST APIs use clear URLs, authentication, validation, pagination, correct status codes, idempotency where needed, and stable versioned contracts.
+**Representational State Transfer (REST)** is a **Hypertext Transfer Protocol (HTTP)** API style centered on resources. Common operations are GET for reads, POST for creation, PUT/PATCH for updates, and DELETE for removal. Good REST APIs use clear URLs, authentication, validation, pagination, correct status codes, idempotency where needed, and stable versioned contracts.
 
 ### How do Flask and FastAPI differ?
 

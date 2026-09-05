@@ -4,7 +4,7 @@
 
 A hallucination is a fluent but unsupported or false model output. It happens because next-token prediction optimizes plausible continuation, not truth verification; causes include missing context, ambiguous prompts, outdated training data, and weak retrieval.
 
-Reduce it with RAG, source citations, explicit abstention (“I do not know from the supplied sources”), structured tools for facts, output validation, and evaluation datasets. Do not promise hallucinations can be reduced to zero.
+Reduce it with Retrieval-Augmented Generation (RAG), source citations, explicit abstention (“I do not know from the supplied sources”), structured tools for facts, output validation, and evaluation datasets. Do not promise hallucinations can be reduced to zero.
 
 ## Injection and guardrails
 
@@ -20,9 +20,9 @@ flowchart LR
     V --> O[Safe response]
 ```
 
-Guardrails are layered controls: input moderation, role separation, retrieval access control, tool allowlists, parameter validation, rate limits, PII redaction, output checks, audit logs, and human approval for high-impact actions. A system prompt alone is not a security boundary.
+Guardrails are layered controls: input moderation, role separation, retrieval access control, tool allowlists, parameter validation, rate limits, Personally Identifiable Information (PII) redaction, output checks, audit logs, and human approval for high-impact actions. A system prompt alone is not a security boundary.
 
-## Constitutional AI and RLHF
+## Constitutional AI and Reinforcement Learning from Human Feedback (RLHF)
 
 | Method | Core idea |
 | --- | --- |
@@ -37,10 +37,10 @@ Both aim to steer model behavior. They are model-training/alignment approaches; 
 
 | Evaluation type | What it checks |
 | --- | --- |
-| Exact / code-based | JSON validity, tool arguments, SQL safety, required fields |
+| Exact / code-based | JavaScript Object Notation (JSON) validity, tool arguments, Structured Query Language (SQL) safety, required fields |
 | Reference comparison | Match with a known correct answer or label |
-| LLM-as-judge | Relevance, helpfulness, style, or faithfulness using a rubric |
-| RAG retrieval metrics | Recall@k, context precision, groundedness |
+| Large Language Model (LLM)-as-judge | Relevance, helpfulness, style, or faithfulness using a rubric |
+| Retrieval-Augmented Generation (RAG) retrieval metrics | Recall@k, context precision, groundedness |
 | Agent trajectory | Correct tool choice, order, and completion |
 | Online monitoring | Production quality, cost, latency, safety incidents |
 

@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | Working / short-term | Current conversation or task | Recent messages and current plan |
 | Long-term | Across sessions | User preferences, approved facts, past outcomes |
-| Semantic memory | Retrieved knowledge | Policy passages from a vector DB |
+| Semantic memory | Retrieved knowledge | Policy passages from a vector database (DB) |
 | Episodic memory | Past events / traces | “The user previously approved this supplier” |
 
 Store memory deliberately. Keep only data that is useful, permitted, and auditable; use retrieval rather than placing every old message into the prompt.
@@ -24,8 +24,8 @@ Use LangChain for a straightforward assistant. Use LangGraph when the process ne
 
 | Protocol | Main connection | Mental model |
 | --- | --- | --- |
-| MCP (Model Context Protocol) | An AI application / agent to external tools, resources, and prompts | “How my agent uses a database, filesystem, or SaaS tool” |
-| A2A (Agent2Agent) | One autonomous agent to another remote agent | “How my travel agent delegates a task to a specialist agent” |
+| MCP (Model Context Protocol) | An AI application / agent to external tools, resources, and prompts | “How my agent uses a database, filesystem, or Software as a Service (SaaS) tool” |
+| A2A (Agent2Agent Protocol) | One autonomous agent to another remote agent | “How my travel agent delegates a task to a specialist agent” |
 
 **MCP components:** host (the AI application), client (connection inside the host), server (tool/resource provider), tools (actions), resources (readable context), and prompts (reusable templates).
 
@@ -35,7 +35,7 @@ Use LangChain for a straightforward assistant. Use LangGraph when the process ne
 flowchart LR
     U[User] --> CA[Client agent]
     CA -->|A2A task| SA[Specialist remote agent]
-    SA -->|uses MCP| TS[Tool server: CRM / DB / APIs]
+    SA -->|uses MCP| TS[Tool server: Customer Relationship Management / database / APIs]
     TS --> SA --> CA --> U
 ```
 
