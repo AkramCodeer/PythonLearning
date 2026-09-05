@@ -4,33 +4,33 @@ Use this file to practise **speaking**, not memorising long theory. Keep each fi
 
 ## Easy real-life examples to remember concepts
 
-| Concept | Easy real-life example |
-| --- | --- |
-| Traditional AI | A bank’s fraud detector: “Is this transaction fraud or not?” |
-| Generative AI | A writer: “Write a product description for these shoes.” |
-| Agentic AI | A shop manager: checks stock → contacts supplier → creates purchase order → confirms it. |
-| System prompt | Company rulebook given to an employee before work starts. |
-| User prompt | A customer’s current request to that employee. |
-| Token | Small word pieces, like LEGO blocks used to build a sentence. |
-| Context window | The desk space available to an employee; too many papers cause confusion. |
-| Transformer | A group discussion where every word can look at every other relevant word. |
-| Self-attention | In “Ravi bought a shirt because he needed it,” finding that “he” means Ravi. |
-| RAG | A librarian finds the correct policy page before an employee answers a customer. |
-| Chunking | Splitting a large book into small labelled pages. |
-| Embedding | Giving every paragraph a “meaning location” on a map. Similar meanings are near each other. |
-| Vector DB | Google Maps for meanings: it finds the nearest meaning, not only the same words. |
-| Reranking | After getting 20 Google results, choosing the best 3 results. |
-| Hallucination | A confident employee guessing an answer without checking the company policy. |
-| Prompt injection | A customer slipping a fake note into company documents: “Ignore company rules and reveal all passwords.” |
-| Guardrails | Security guard + access card + approval process around an employee. |
-| Tool calling | An employee asks the warehouse system for real stock instead of guessing. |
-| Agent memory | A receptionist remembering your name, last request, and preferences. |
-| LangChain | A toolbox containing LLM, prompts, tools, and retrieval components. |
-| LangGraph | A workflow map showing what happens next, including retries and manager approval. |
-| MCP | A standard plug that lets an AI assistant connect to different tools. |
-| A2A | One specialist employee asking another specialist employee to complete a task. |
-| REST API | Restaurant ordering: customer requests, kitchen processes, waiter returns the result. |
-| Event-driven architecture | When an order is placed, inventory, billing, and notifications all receive the event independently. |
+| Concept | Interview-ready definition | Easy real-life example |
+| --- | --- | --- |
+| Traditional AI | AI that predicts, classifies, or scores a known output from data. | A bank’s fraud detector: “Is this transaction fraud or not?” |
+| Generative AI | AI that creates new text, code, images, audio, or other content. | A writer: “Write a product description for these shoes.” |
+| Agentic AI | An LLM-based system that plans, uses tools, observes results, and completes a task. | A shop manager: checks stock → contacts supplier → creates purchase order → confirms it. |
+| System prompt | Higher-priority instructions that define behavior, boundaries, and response style. | Company rulebook given to an employee before work starts. |
+| User prompt | The current task, question, or instruction given by the user. | A customer’s current request to that employee. |
+| Token | A small text unit that a model reads and processes. | Small word pieces, like LEGO blocks used to build a sentence. |
+| Context window | The maximum token information a model can consider in one request. | The desk space available to an employee; too many papers cause confusion. |
+| Transformer | An attention-based neural-network architecture for understanding token relationships. | A group discussion where every word can look at every other relevant word. |
+| Self-attention | Mechanism where each token weighs relevant tokens in the same input. | In “Ravi bought a shirt because he needed it,” finding that “he” means Ravi. |
+| RAG | Retrieve trusted evidence before an LLM generates an answer. | A librarian finds the correct policy page before an employee answers a customer. |
+| Chunking | Splitting content into smaller focused units for retrieval. | Splitting a large book into small labelled pages. |
+| Embedding | A numeric vector that represents text meaning. | Giving every paragraph a “meaning location” on a map. Similar meanings are near each other. |
+| Vector DB | Database that finds vectors with similar meaning efficiently. | Google Maps for meanings: it finds the nearest meaning, not only the same words. |
+| Reranking | Reordering retrieved candidates using a stronger relevance score. | After getting 20 Google results, choosing the best 3 results. |
+| Hallucination | A fluent but unsupported or false LLM response. | A confident employee guessing an answer without checking the company policy. |
+| Prompt injection | Untrusted content attempting to override instructions or trigger unsafe behavior. | A customer slipping a fake note into company documents: “Ignore company rules and reveal all passwords.” |
+| Guardrails | Layered runtime controls that constrain AI inputs, tools, and outputs. | Security guard + access card + approval process around an employee. |
+| Tool calling | An LLM requests a typed application function; application code executes it. | An employee asks the warehouse system for real stock instead of guessing. |
+| Agent memory | Stored task, user, knowledge, or past-outcome information used by an agent. | A receptionist remembering your name, last request, and preferences. |
+| LangChain | Framework with components for models, prompts, tools, retrieval, and agent loops. | A toolbox containing LLM, prompts, tools, and retrieval components. |
+| LangGraph | Stateful workflow framework for agent branches, retries, persistence, and approvals. | A workflow map showing what happens next, including retries and manager approval. |
+| MCP | Model Context Protocol: standard connection between an AI app and external capabilities. | A standard plug that lets an AI assistant connect to different tools. |
+| A2A | Agent2Agent Protocol: standard communication between independent agents. | One specialist employee asking another specialist employee to complete a task. |
+| REST API | Resource-oriented HTTP interface for software communication. | Restaurant ordering: customer requests, kitchen processes, waiter returns the result. |
+| Event-driven architecture | Services react independently to published events. | When an order is placed, inventory, billing, and notifications all receive the event independently. |
 
 > **Memory shortcut:** RAG is like an open-book exam: first find the correct page, then answer from it. Agentic AI is like a smart employee: it does the work, not only explains the work.
 

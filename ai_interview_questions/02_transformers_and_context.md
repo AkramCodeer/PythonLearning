@@ -30,6 +30,18 @@ flowchart LR
 
 **How order works:** position embeddings or positional encodings are added to token embeddings before attention. Modern models may use relative/rotary position methods rather than a simple fixed index.
 
+## Transformer choices: benefits, limits, and examples
+
+| Topic | Advantages | Limitations / drawbacks | Real-life example |
+| --- | --- | --- | --- |
+| Self-attention | Connects distant relevant words | Attention cost grows quickly with long input | Link “it” to the correct product in a long complaint |
+| Encoder-only model | Strong embeddings and classification | Does not naturally generate long text | Search similar support tickets |
+| Decoder-only model | Strong chat, code, and generation | Can hallucinate; output is probabilistic | Customer-support assistant reply |
+| Encoder-decoder model | Good input-to-output transformation | More architecture components | Translate an invoice summary |
+| Long context | Can read more material at once | Higher cost, latency, and lost-in-the-middle risk | Review a long contract |
+
+**Best practice:** never assume a large context window means the model will use every page well. Retrieve, filter, and order evidence deliberately.
+
 ## Context overload and “lost in the middle”
 
 Every model has a context window. Too much context raises cost, latency, and confusion. “Lost in the middle” describes a common pattern where models use information near the beginning or end more reliably than equally relevant information buried in the middle.

@@ -11,6 +11,17 @@
 
 Store memory deliberately. Keep only data that is useful, permitted, and auditable; use retrieval rather than placing every old message into the prompt.
 
+### Agent patterns and trade-offs
+
+| Pattern | Advantage | Drawback | Real-life example |
+| --- | --- | --- | --- |
+| Single tool-using agent | Simple architecture | Can become unreliable for complex work | Support bot checks one order API |
+| Router + specialist workflows | Clear separation of responsibilities | More routing and observability work | Send billing, catalog, and analytics requests to different flows |
+| Multi-agent delegation | Useful for independent specialist tasks | More latency, cost, and coordination failures | Research agent delegates data analysis to an analyst agent |
+| Human-in-the-loop | Safer for high-impact actions | Slower experience | Manager approves a purchase order before submission |
+
+**Best practice:** begin with a deterministic workflow and a small tool set. Add autonomous planning or multiple agents only when a measurable need exists.
+
 ## LangChain and LangGraph
 
 | Tool | Role |

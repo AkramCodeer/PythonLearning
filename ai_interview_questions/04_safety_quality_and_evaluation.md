@@ -57,3 +57,15 @@ Score correctness, groundedness, safety, latency, cost
         ↓
 Inspect failures → improve → run regression suite again
 ```
+
+## Evaluation methods: advantages and drawbacks
+
+| Method | Advantage | Drawback | Best use |
+| --- | --- | --- | --- |
+| Code-based assertion | Fast, repeatable, objective | Cannot judge nuanced writing quality | JSON, tool arguments, SQL safety |
+| Reference / ground-truth comparison | Measures against trusted outcomes | Creating labels takes effort | Classification, extraction, known Q&A |
+| LLM-as-a-judge | Scales rubric-based quality review | Judge bias and cost; needs calibration | Helpfulness, relevance, tone |
+| Human review | Best for subtle correctness and high risk | Slow and expensive | Launch checks, medical/legal/high-impact cases |
+| Online monitoring | Finds real production failures | No guaranteed reference answer | Safety incidents, latency, feedback trends |
+
+**Best practice:** combine methods. For example, validate JSON with code, check RAG citations with retrieval metrics, and sample subjective quality with human or calibrated LLM judging.

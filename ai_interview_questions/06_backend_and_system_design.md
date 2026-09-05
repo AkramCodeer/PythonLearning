@@ -15,6 +15,17 @@ REST is an architectural style for Hypertext Transfer Protocol (HTTP) APIs built
 
 FastAPI is often convenient for AI APIs because requests frequently wait on model, vector database (DB), or external tool Input / Output (I/O). Framework choice does not make a system scalable by itself—database, model latency, queueing, caching, observability, and deployment matter too.
 
+### API styles: advantages and drawbacks
+
+| Style | Advantage | Drawback | Real-life example |
+| --- | --- | --- | --- |
+| REST API | Simple, resource-oriented, widely understood | Multiple requests can be needed for related data | `GET /orders/123` returns an order |
+| GraphQL | Client requests exactly the data it needs | More complex schema/security design | Dashboard asks for order, customer, and items in one query |
+| gRPC | Fast typed service-to-service calls | Less browser-friendly and harder to inspect manually | Internal inventory service calls |
+| Webhooks / events | Decoupled asynchronous processing | Requires idempotency and failure handling | `OrderCreated` triggers inventory and notifications |
+
+**Best practice:** use REST for clear external resource APIs, asynchronous events for long-running or decoupled work, and queues/workers for tasks that should not block a user request.
+
 ## Database optimization
 
 1. Measure slow queries first using query plans and production-like data.
@@ -23,6 +34,16 @@ FastAPI is often convenient for AI APIs because requests frequently wait on mode
 4. Use connection pooling, caching, and read replicas when justified.
 5. Partition/archive very large tables only after measuring.
 6. For RAG, separately tune chunk strategy, metadata filters, vector index parameters, and reranking.
+
+### Database optimization: benefit and risk
+
+| Technique | Benefit | Risk / drawback | Example |
+| --- | --- | --- | --- |
+| Index | Faster reads for common filters | Extra storage and slower writes | Index `order_id` for order lookup |
+| Cache | Low latency for repeated reads | Stale data and invalidation complexity | Cache product catalog for five minutes |
+| Connection pool | Reuses expensive database connections | Bad pool settings can exhaust the database | API workers share a controlled pool |
+| Read replica | Scales read-heavy workloads | Replication delay | Reports read from replica; payments use primary |
+| Partitioning | Improves very large-table operations | More operational complexity | Partition logs by month |
 
 ## AI service High-Level Design (HLD)
 
