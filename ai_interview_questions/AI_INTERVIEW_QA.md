@@ -118,6 +118,12 @@ Ground truth is the trusted expected answer, label, source passage, tool call, o
 
 RAG retrieves relevant, permitted information before the LLM answers. Documents are split into chunks, embedded, and stored in a vector **database (DB)**. A user question is embedded with the same model; the vector DB finds similar chunks; then the application filters, reranks, and sends selected evidence to the LLM with a citation requirement.
 
+### How do you use PostgreSQL and pgvector in your RAG system?
+
+I use PostgreSQL as the primary relational database and the `pgvector` extension to store embedding vectors. Each document chunk is stored with its text, embedding, source metadata, tenant, and permission fields. When a user asks a question, I generate a query embedding, search for nearby vectors, apply SQL metadata and access-control filters, and pass the best chunks to the LLM as evidence. This approach lets me use semantic search together with normal SQL queries, joins, and transactions without maintaining a separate vector database.
+
+For performance, `pgvector` supports exact search as well as approximate indexes such as **Hierarchical Navigable Small World (HNSW)** and **Inverted File Flat (IVFFlat)**. HNSW usually offers strong query speed and recall at the cost of additional memory and build time. I chose `pgvector` because the application already uses PostgreSQL; for a much larger or specialized vector workload, I would benchmark it against dedicated vector databases.
+
 ### What chunking strategies are used in RAG?
 
 Start with 300–800 tokens and 50–150 token overlap, then measure quality. Chunk by natural structure: heading and paragraphs for documents, functions/classes for code, pages plus headings for PDFs, and rows plus headers for tables. Store source, page, version, tenant, and permissions with every chunk.

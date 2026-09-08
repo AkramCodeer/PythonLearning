@@ -9,6 +9,7 @@
 | DB | Database | Organized store of data. |
 | ANN | Approximate Nearest Neighbor | Fast approximate similarity search over vectors. |
 | HNSW | Hierarchical Navigable Small World | A graph-based ANN index. |
+| IVFFlat | Inverted File Flat | A partition-based ANN index supported by pgvector. |
 | HyDE | Hypothetical Document Embeddings | Retrieval technique using an LLM-generated hypothetical document. |
 | MCP | Model Context Protocol | Protocol for connecting AI applications to tools and resources. |
 | A2A | Agent2Agent Protocol | Protocol for communication between AI agents. |

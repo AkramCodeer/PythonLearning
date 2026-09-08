@@ -84,6 +84,10 @@ Use this file to practise **speaking**, not memorising long theory. Keep each fi
 
 > In RAG, I first split documents into focused chunks and attach metadata such as source, page, and access permissions. I convert each chunk into an embedding and store it in a vector database. At query time, I embed the user’s question, retrieve similar chunks, apply permission filters and reranking, then give the best evidence to the LLM with a citation requirement. This grounds answers in current company data.
 
+### How do you use PostgreSQL and pgvector?
+
+> I use PostgreSQL as my main database and pgvector for vector storage and similarity search. I store each document chunk with its embedding, metadata, tenant, and permission information. At query time, I embed the question, retrieve the closest chunks, and combine vector similarity with SQL filters before sending the evidence to the LLM. I chose pgvector because we already use PostgreSQL, so it gives us semantic search without adding another database. I can use HNSW or IVFFlat indexes as the data grows, and I would benchmark a dedicated vector database if the workload became very large or specialized.
+
 ## How should I explain vector search and reranking?
 
 > Dense vector search finds semantic similarity, while sparse keyword search is strong for exact names, Stock Keeping Units, or error codes. In production, I often combine them as hybrid search. Then I use a reranker to score the question and candidate chunk together, so the LLM receives only the most relevant evidence.

@@ -15,6 +15,18 @@ flowchart LR
     R --> L[LLM: answer with citations]
 ```
 
+## PostgreSQL with pgvector
+
+I use PostgreSQL as the primary relational database and the `pgvector` extension to store and search embedding vectors. This lets me keep vectors, document text, metadata, tenant information, and access-control fields together while still using normal SQL queries, joins, filters, and transactions.
+
+In a RAG pipeline, I split documents into chunks, generate an embedding for each chunk, and save the embedding in a `vector` column. At query time, I embed the user's question and use a distance operator to retrieve the most similar chunks. I can then apply SQL metadata or permission filters before sending the selected evidence to the LLM.
+
+`pgvector` supports exact similarity search and approximate indexes such as **Hierarchical Navigable Small World (HNSW)** and **Inverted File Flat (IVFFlat)**. HNSW generally provides strong query performance and recall but uses more memory and takes longer to build. IVFFlat is lighter, but it requires representative data and tuning. This setup is a practical choice when an application already uses PostgreSQL and does not yet need a separate vector database.
+
+### Interview question: Why did you choose pgvector?
+
+I chose `pgvector` because the application already uses PostgreSQL. It lets me add semantic search without operating another database, and I can combine vector similarity with relational filters, permissions, and transactions in one query. For large-scale or highly specialized vector workloads, I would benchmark it against a dedicated vector database before deciding.
+
 ## Chunking
 
 A chunk is a retrievable document unit. Start with 300–800 tokens and 50–150 token overlap, then evaluate. Prefer structural boundaries: heading + paragraphs for prose, function/class for code, page + heading for PDFs, and rows plus headings for tables.
