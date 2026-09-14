@@ -1,0 +1,31 @@
+
+ACCOUNT ACCESS
+
+Customers can reset their password from the Account Settings page. They must select Security and then choose Change Password.
+
+If a customer cannot sign in, they can select Forgot Password on the login page. A password-reset link will be sent to the email address registered with the account. The link expires after 30 minutes.
+
+After five unsuccessful login attempts, the account is temporarily locked for 15 minutes. Customer-support agents cannot view or provide a customer's password.
+
+
+REFUND POLICY
+
+Customers may request a refund within 30 days of purchase. The request must include the order number and the email address used for the purchase.
+
+Refunds are returned to the original payment method. After approval, processing normally takes five to seven business days.
+
+Digital products that have been completely downloaded and customized products are not eligible for refunds unless they are defective.
+
+
+ORDER CANCELLATION
+
+An order may be cancelled before it has been shipped. Customers can open the Orders page, select the order, and choose Cancel Order.
+
+If the order has already shipped, it cannot be cancelled. The customer must wait for delivery and then follow the return process.
+
+
+CUSTOMER SUPPORT
+
+Customer support is available Monday through Friday from 9 AM to 6 PM. Support is unavailable on public holidays.
+
+Customers should include their order number when contacting support about purchases. Passwords, payment-card numbers, and other sensitive information must never be included in a support message.

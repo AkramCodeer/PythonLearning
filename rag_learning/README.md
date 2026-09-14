@@ -13,6 +13,8 @@ This folder is a practical path for learning **Retrieval-Augmented Generation (R
 7. [07_vector_databases_retrieval_and_embeddings.md](07_vector_databases_retrieval_and_embeddings.md) — vector DB choices, chunking, embeddings, retrieval, and a Chroma Python example.
 8. [08_rag_vector_db_for_beginners.md](08_rag_vector_db_for_beginners.md) — plain-English RAG and vector database explanation; start here before the detailed guide.
 
+9. [09_advanced_multi_agent_interview_guide.md](09_advanced_multi_agent_interview_guide.md) — advanced multi-agent architecture, Agentic RAG, CrewAI, orchestration, security, evaluation, scaling, and interview questions.
+
 ## Suggested order
 
 Read files 1 and 2, run file 3, then use files 4 and 5 to choose an advanced project. The Python demo runs with any recent Python 3 installation:
