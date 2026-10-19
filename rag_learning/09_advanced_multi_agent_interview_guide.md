@@ -86,6 +86,36 @@ flowchart TD
     M -->|Budget/policy hit| H[Stop or request human]
 ```
 
+### 3.1 Classical types of intelligent agents
+
+These categories describe how an **individual agent decides**, not how a multi-agent team is organized.
+
+| Agent type | Decision basis | Example | Limitation |
+| --- | --- | --- | --- |
+| Simple reflex | Current observation and condition–action rules | If retrieval is empty, return a fallback | Cannot reason about hidden state or history |
+| Model-based reflex | Current observation plus an internal state/model | Track which workflow steps have completed | Its internal model may be incomplete or stale |
+| Goal-based | Chooses actions that move toward a target state | Plan searches until enough evidence is found | May treat all goal-reaching paths as equally good |
+| Utility-based | Selects the action with the best expected trade-off | Balance answer quality, latency, risk, and cost | Requires a meaningful utility function |
+| Learning agent | Improves behavior using feedback or experience | Improve routing from labeled production outcomes | Feedback can be noisy, biased, or unsafe |
+
+Modern LLM agents are usually hybrids. An agent might plan toward a goal, use a utility-like score to choose a tool, react to tool output, maintain workflow state, and improve through offline evaluation.
+
+### 3.2 Common modern LLM-agent roles
+
+These are practical roles, not mutually exclusive theoretical types:
+
+- **Conversational agent:** maintains a dialogue and responds to a user.
+- **RAG agent:** decides when and how to retrieve grounded knowledge.
+- **Tool-using/action agent:** invokes APIs or business operations through controlled tools.
+- **Planning agent:** decomposes a goal and sequences work.
+- **Coding agent:** reads, edits, runs, and tests software within permissions.
+- **Reviewer/critic agent:** evaluates another component against a rubric.
+- **Autonomous agent:** performs several bounded steps with limited human input; “autonomous” never means unlimited permissions.
+
+### Interview answer
+
+> If you mean individual intelligent agents, the classical types are simple reflex, model-based reflex, goal-based, utility-based, and learning agents. Modern LLM agents often combine several of these behaviors and are also described by their role, such as conversational, RAG, planning, tool-using, coding, or reviewer agents. If you mean multi-agent systems, I would classify the team separately by control, capabilities, objectives, decision style, and membership.
+
 ## 4. Agent loop and stopping rules
 
 Without stopping rules, agents can repeat calls, consume tokens, and duplicate actions. Stop when:
@@ -162,9 +192,91 @@ The triage agent should not have every tool. A refund agent should not read unre
 
 ---
 
-# Part 3 — Orchestration patterns
+# Part 3 — Types of multi-agent systems and orchestration patterns
 
-## 8. Sequential pipeline
+## 8. Types of multi-agent systems
+
+There is no single list of “multi-agent types.” Interviewers may classify a system by **control structure, agent capability, relationship, decision style, or team membership**. Start by naming the classification axis; this prevents mixing unrelated categories.
+
+### 8.1 By control structure
+
+| Type | How it works | Strength | Main risk | Example |
+| --- | --- | --- | --- | --- |
+| Centralized | One supervisor/router coordinates specialists | Easier control, security, and tracing | Coordinator bottleneck or single point of failure | Support supervisor routes billing and policy work |
+| Decentralized | Agents communicate and coordinate as peers | Flexible and resilient | Harder to predict, debug, and stop | Robots negotiate task allocation |
+| Hierarchical | Managers coordinate teams or subteams | Scales organizational responsibility | Extra latency and communication overhead | Research manager coordinates search specialists |
+| Hybrid | Central control for policy with limited peer collaboration | Balances governance and flexibility | More design complexity | Orchestrator approves a plan; specialists exchange evidence |
+
+### 8.2 By agent capability
+
+| Type | Meaning | Example |
+| --- | --- | --- |
+| Homogeneous | Agents use similar models, prompts, and capabilities; they may differ only by assigned task | Several identical research workers process different documents |
+| Heterogeneous | Agents have different roles, models, tools, permissions, or domain knowledge | Retriever, SQL analyst, refund executor, and compliance reviewer |
+
+Heterogeneous teams are common in production because specialization and least privilege are useful. Homogeneous teams are useful for parallel scale, independent sampling, debate, or voting.
+
+### 8.3 By relationship or objective
+
+| Type | Meaning | Example |
+| --- | --- | --- |
+| Cooperative | Agents share one goal and combine work | Planner, researcher, writer, and reviewer produce a report |
+| Competitive | Agents optimize opposing or individual objectives | Attacker finds weaknesses while defender blocks them |
+| Mixed | Agents cooperate at the system level but have locally conflicting roles | Generator tries to answer; critic tries to reject unsupported claims |
+
+Competition can improve coverage, but disagreement and majority voting do not establish truth. Final decisions should use evidence, deterministic checks, or human review.
+
+### 8.4 By decision style
+
+| Type | Meaning | Best fit |
+| --- | --- | --- |
+| Reactive | Responds to the current observation with little or no long-term planning | Fast event handling and simple environments |
+| Deliberative | Builds a plan or internal model before acting | Multi-step research and complex dependencies |
+| Hybrid | Uses fast reactive behavior for simple events and planning for difficult goals | Most practical production systems |
+
+### 8.5 By team membership
+
+| Type | Meaning | Example |
+| --- | --- | --- |
+| Static | Agents and roles are defined before execution | Fixed triage → retrieval → review pipeline |
+| Dynamic | The system creates, selects, or removes roles according to the task | Supervisor recruits finance and legal specialists only when needed |
+
+Dynamic teams can save context or add specialization, but they need strict limits on which roles, tools, and permissions may be created.
+
+### 8.6 Common orchestration patterns
+
+The classifications above describe what kind of system it is. The patterns below describe how work moves through it. One design can belong to several categories—for example, a **centralized, heterogeneous, cooperative, hybrid-decision, static** support team using a router and reviewer.
+
+| Pattern | Control flow | Use it when |
+| --- | --- | --- |
+| Sequential | One stage follows another | Dependencies and order are known |
+| Router | Classify and select a specialist | Requests belong to distinct domains |
+| Supervisor–worker | A coordinator delegates and combines | Subtasks must be planned dynamically |
+| Handoff | Ownership transfers to another agent | A specialist should continue the conversation |
+| Hierarchical | Managers coordinate subteams | Many agents form clear domain groups |
+| Fan-out/fan-in | Independent work runs in parallel and is reduced | Subtasks do not depend on one another |
+| Reviewer/reflection | A critic checks and requests bounded revision | Independent validation has measurable value |
+| Debate/voting | Multiple candidates compete or vote | Diverse attempts improve difficult reasoning |
+| Blackboard | Agents read/write structured shared state | Specialists contribute asynchronously |
+
+### Interview answer
+
+> Multi-agent systems can be classified along several axes. By control, they may be centralized, decentralized, hierarchical, or hybrid. By capability, they may be homogeneous or heterogeneous. By objective, they may be cooperative, competitive, or mixed. They may also be reactive or deliberative, and static or dynamic. These types are different from orchestration patterns such as sequential, router, supervisor, handoff, parallel fan-out, debate, and shared-state designs. In production I usually begin with a centralized, heterogeneous, cooperative team because permissions, state, budgets, and traces are easier to control.
+
+### 8.7 How to choose a type or pattern
+
+1. Use a **router** when exactly one domain normally owns the request.
+2. Use **sequential stages** when outputs have clear dependencies.
+3. Use **parallel fan-out** only for independent, mostly read-only work.
+4. Use a **supervisor** when decomposition cannot be predetermined.
+5. Use a **handoff** when conversation ownership must transfer.
+6. Add a **reviewer** when independent checking improves measured quality.
+7. Prefer **centralized or hybrid control** when security, auditability, and cost limits matter.
+8. Prefer a **single agent or deterministic workflow** when specialization adds no measurable benefit.
+
+## Orchestration patterns in detail
+
+### Sequential pipeline
 
 ```mermaid
 flowchart LR
@@ -178,7 +290,7 @@ flowchart LR
 
 **Advantage:** simple to test. **Risk:** early errors propagate and every stage adds latency.
 
-## 9. Router pattern
+### Router pattern
 
 ```mermaid
 flowchart TD
@@ -194,7 +306,7 @@ flowchart TD
 
 A router chooses one or more specialists. Low routing confidence needs a fallback instead of a forced guess.
 
-## 10. Supervisor and workers
+### Supervisor and workers
 
 ```mermaid
 sequenceDiagram
@@ -217,7 +329,7 @@ sequenceDiagram
 
 The supervisor decomposes, delegates, tracks completion, enforces budgets, and combines results. It can become a bottleneck and must not automatically receive every permission.
 
-## 11. Handoff pattern
+### Handoff pattern
 
 The active agent transfers ownership to another specialist:
 
@@ -229,7 +341,7 @@ A handoff payload should contain the reason, user goal, verified facts, complete
 
 Use handoff when ownership should move. Use supervisor/subagent calls when central control should remain with the coordinator.
 
-## 12. Hierarchical teams
+### Hierarchical teams
 
 ```text
 Executive coordinator
@@ -243,7 +355,7 @@ Executive coordinator
 
 Use hierarchy only when the team size and domain boundaries justify it. Deep hierarchies multiply cost and complicate causal tracing.
 
-## 13. Parallel fan-out/fan-in
+### Parallel fan-out/fan-in
 
 ```mermaid
 flowchart LR
@@ -259,7 +371,7 @@ flowchart LR
 
 Parallel work improves wall-clock time only for independent subtasks. Avoid concurrent writes to the same record without transactions, locking, or conflict resolution.
 
-## 14. Reviewer/reflection pattern
+### Reviewer/reflection pattern
 
 ```text
 Generator -> Reviewer -> accepted
@@ -276,11 +388,11 @@ Give the reviewer a rubric:
 
 Limit revision attempts. Unbounded reflection creates loops.
 
-## 15. Debate or voting
+### Debate or voting
 
 Several agents propose solutions and a judge selects or combines them. This can help difficult reasoning, but correlated models can repeat the same mistake. Agreement is not proof. The judge needs external evidence or deterministic checks.
 
-## 16. Blackboard/shared state
+### Blackboard/shared state
 
 ```python
 from typing import Any, TypedDict
@@ -892,6 +1004,34 @@ evaluation_results          -> quality data
 
 > Compare it with a single-agent baseline on the same labeled tasks. Measure completion, correctness, safety, routing/retrieval/tool accuracy, latency, tokens, and cost per successful task. Keep the simpler system if there is no material gain.
 
+## 61. What are the main types of multi-agent systems?
+
+> The answer depends on the classification axis. By control they are centralized, decentralized, hierarchical, or hybrid. By capability they are homogeneous or heterogeneous. By objective they are cooperative, competitive, or mixed. By decision style they are reactive, deliberative, or hybrid, and by membership they are static or dynamic. I would then describe the orchestration pattern—such as router, supervisor, handoff, sequential, or parallel—separately.
+
+## 62. Centralized versus decentralized multi-agent systems?
+
+> A centralized system uses an orchestrator to route work, maintain state, enforce budgets, and combine results. It is easier to secure, trace, and debug, but the coordinator can become a bottleneck. A decentralized system lets peer agents negotiate or communicate directly, which can be more flexible and resilient but is harder to govern and terminate. For most enterprise workflows, I would start centralized and decentralize only for a demonstrated need.
+
+## 63. Homogeneous versus heterogeneous agents?
+
+> Homogeneous agents have similar capabilities and are useful for parallel processing, multiple independent attempts, or voting. Heterogeneous agents have different instructions, models, tools, permissions, or expertise and are useful when the task contains distinct specialties. The choice is about required capability, not merely giving identical agents different names.
+
+## 64. Cooperative versus competitive agents?
+
+> Cooperative agents share an overall goal and divide the work. Competitive agents propose opposing solutions or optimize different objectives. A mixed design may use a generator and a critic: they conflict locally but cooperate toward system quality. Competition may expose errors, but evidence and business rules—not majority agreement—should decide correctness.
+
+## 65. Static versus dynamic teams?
+
+> A static team has predefined roles and predictable control flow, which makes testing and authorization easier. A dynamic team selects or creates specialists at runtime, which can adapt to novel tasks but increases cost and governance risk. Dynamic selection should come from an allowlisted catalog with bounded tools, permissions, depth, and budget.
+
+## 66. What is the difference between an agent type and an orchestration pattern?
+
+> An agent or system type describes its properties—for example heterogeneous, cooperative, and centralized. An orchestration pattern describes how tasks and control move—for example routing, handoff, supervisor–worker, or fan-out/fan-in. A single architecture has both: a customer-support design might be a centralized, heterogeneous, cooperative system orchestrated with a router and reviewer.
+
+## 67. What are the classical types of AI agents?
+
+> A simple reflex agent applies rules to the current observation. A model-based agent also maintains internal state. A goal-based agent chooses actions that reach a goal. A utility-based agent compares goal-reaching options using expected value or trade-offs. A learning agent improves from feedback. Real LLM applications are generally hybrid agents rather than pure examples of only one category.
+
 ---
 
 # Part 13 — Common interview mistakes
@@ -984,6 +1124,13 @@ Start with a read-only tool. Add writes only with schema validation, authorizati
 13. Why is agent agreement not proof?
 14. MCP versus A2A?
 15. Which metrics compare single and multi-agent systems?
+16. What are the five useful axes for classifying multi-agent systems?
+17. Centralized versus decentralized: what are the trade-offs?
+18. Homogeneous versus heterogeneous: when would you use each?
+19. Cooperative versus competitive: how is correctness decided?
+20. Static versus dynamic: what extra controls does a dynamic team need?
+21. Is supervisor–worker a system type or an orchestration pattern?
+22. What are the five classical individual-agent types, and how do they differ from team types?
 
 ---
 
